@@ -1,3 +1,5 @@
+import random
+
 from scr.card import Card
 
 
@@ -29,3 +31,12 @@ class Deck:
 
         deck = Deck(cards=cards)
         return deck
+
+    def draw_card(self):
+        """Берем карту из колоды (ее там больше нет), возвращаем эту карту."""
+        c = self.cards.pop()
+        return c
+
+    def shuffle(self):
+        """Перемешать колоду."""
+        random.shuffle(self.cards)
