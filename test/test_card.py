@@ -11,7 +11,7 @@ def test_print():
     assert str(c) == 'y8'
 
 def test_create_from_str():
-    c = Card.create('b5')
+    c = Card.load('b5')
     assert c.color == 'blue'
     assert c.number == 5
 
@@ -26,4 +26,11 @@ def test_playable():
     assert c1.playable(c3)
     assert c1.playable(c4)
     assert not c1.playable(c5)
+
+
+def test_all_cards():
+    colors = ['blue', 'red']
+    numbers = [2, 5, 7]
+    cards = Card.all_cards(colors, numbers)
+    assert str(cards) == "[b2, b5, b7, r2, r5, r7]"
 

@@ -1,7 +1,7 @@
 class Card:
     COLORS = ('red', 'green', 'blue', 'yellow')
     DCOLORS = {color[0]: color for color in COLORS}
-    NUMBERS = list(range(10))
+    NUMBERS = list(range(10)) + list(range(1, 10))
 
     def __init__(self, color: str, number: int):
         self.color = color
@@ -11,8 +11,11 @@ class Card:
         letter = self.color[0]
         return f'{letter}{self.number}'
 
+    def save(self):
+        return repr(self)
+
     @classmethod
-    def create(cls, text: str):
+    def load(cls, text: str):
         """Создает карту из строки вида 'y8' и возвращает её."""
         # text = 'y8'
         letter = text[0]   # 'y'
@@ -26,6 +29,20 @@ class Card:
         return self.color == other.color or self.number == other.number
 
     @staticmethod
-    def all_cards():
-        """Возвращает все карты."""
-        pass
+    def all_cards(colors=None, numbers=None):
+        """Возвращает все карты.
+        :param colors:
+        :param numbers:
+        """
+        if colors is None:
+            colors = Card.COLORS
+        if numbers is None:
+            numbers = Card.NUMBERS
+
+        cards = []
+        for col in colors:
+            for n in numbers:
+                c = Card(col, n)
+                cards.append(c)
+
+        return cards
