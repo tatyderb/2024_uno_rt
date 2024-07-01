@@ -46,11 +46,13 @@ Alex WIN!
   "players": [
     {
       "name": "Alex",
-      "hand": "r3 y5 g4 g1"
+      "hand": "r3 y5 g4 g1",
+      "interactive": true
     },
     {
       "name": "Bob",
-      "hand": "y6 y2 r8"
+      "hand": "y6 y2 r8",
+      "interactive": false
     }
   ]
 }
