@@ -4,8 +4,17 @@ class Card:
     NUMBERS = list(range(10)) + list(range(1, 10))
 
     def __init__(self, color: str, number: int):
-        self.color = color
-        self.number = number
+        if color in Card.DCOLORS.keys() or color in Card.DCOLORS.values():
+            self.color = color
+        else:
+            raise ValueError(f'Unexpected color {color}')
+        if number in Card.NUMBERS:
+            self.number = number
+        else:
+            raise ValueError(f'Unexpected number {number}')
+
+    def __eq__(self, other):
+        return self.color == other.color and self.number == other.number
 
     def __repr__(self):
         letter = self.color[0]
@@ -45,4 +54,6 @@ class Card:
                 c = Card(col, n)
                 cards.append(c)
 
+        # return [Card(col, n) for col in colors for n in numbers]
         return cards
+
