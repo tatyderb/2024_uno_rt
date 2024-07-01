@@ -12,6 +12,9 @@ UNO game live coding
 ```
 Top: g2
 Alex: r3 y5 g4 g1
+Alex: введите какую карту играем из руки: п4
+Alex: такой карты нет в руке
+Alex: введите какую карту играем из руки: g4
 Alex play: g4
 -----
 Top: g4
