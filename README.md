@@ -47,12 +47,12 @@ Alex WIN!
     {
       "name": "Alex",
       "hand": "r3 y5 g4 g1",
-      "interactive": true
+      "is_human": true
     },
     {
       "name": "Bob",
       "hand": "y6 y2 r8",
-      "interactive": false
+      "is_human": false
     }
   ]
 }
