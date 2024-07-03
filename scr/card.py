@@ -1,17 +1,17 @@
+class CardException(Exception):
+    pass
+
 class Card:
     COLORS = ('red', 'green', 'blue', 'yellow')
     DCOLORS = {color[0]: color for color in COLORS}
     NUMBERS = list(range(10)) + list(range(1, 10))
 
     def __init__(self, color: str, number: int):
-        if color in Card.DCOLORS.keys() or color in Card.DCOLORS.values():
-            self.color = color
-        else:
-            raise ValueError(f'Unexpected color {color}')
-        if number in Card.NUMBERS:
-            self.number = number
-        else:
-            raise ValueError(f'Unexpected number {number}')
+        if color not in Card.DCOLORS.keys() and color not in Card.DCOLORS.values() or \
+            number not in Card.NUMBERS:
+            raise CardException()
+        self.color = color
+        self.number = number
 
     def __eq__(self, other):
         return self.color == other.color and self.number == other.number
