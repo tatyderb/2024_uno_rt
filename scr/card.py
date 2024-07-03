@@ -30,7 +30,7 @@ class Card:
         letter = text[0]   # 'y'
         number = text[1]   # '8'
         color = cls.DCOLORS[letter]
-        card = Card(color, int(number))
+        card = cls(color, int(number))
         return card
 
     def playable(self, other) -> bool:

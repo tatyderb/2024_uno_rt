@@ -27,6 +27,12 @@ class GameState:
             top = self.deck.draw_card()
         self.top = top
 
+        # если у всех игроков нет карт, это новая игра, раздадим по 7 карт всем
+        for p in self.players:
+            for _ in range(7):
+                p.hand.add_card(self.deck.draw_card())
+
+
     def current_player(self) -> Player:
         return self.players[self.iplayer]
 
@@ -48,7 +54,8 @@ class GameState:
 
     @classmethod
     def new_game(cls, players: list[Player]):
-        return cls(players)
+        game = cls(players)
+
 
     def run(self, game_interactions: GameInteractions) -> Player:
         """Игра до победы, возвращает игрока-победителя. До этой функции должны быть вызваны или load, или new_game"""
