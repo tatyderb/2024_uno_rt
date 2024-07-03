@@ -1,4 +1,4 @@
-from scr.card import Card
+from scr.card import Card, CardException
 from scr.hand import Hand
 
 
@@ -18,7 +18,7 @@ class Human:
                     return card
                 else:
                     print('Такой карты нет в руке')
-            except (ValueError, KeyError, IndexError):
+            except CardException:
                 print('Такой карты не существует')
 
 
@@ -80,7 +80,7 @@ class Player:
     def load(cls, data: dict):
         return cls.from_dict(data)
 
-    def choose_card(self, top: Card, card_counts: list[int]):
+    def choose_card(self, top: Card, card_counts: list[int]) -> Card | None:
         return self.actor.choose_card(self.hand, top, card_counts)
 
 

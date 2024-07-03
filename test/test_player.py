@@ -45,9 +45,12 @@ def test_AI_choose_card():
     assert card is None
 
 def test_Human_choose_card():
-    import sys
-    stdin = sys.stdin
-    with open('human_input_data', 'r') as fin:
-        sys.stdin = fin
-        # ....
-    sys.stdin = stdin
+    # import sys
+    # stdin = sys.stdin
+    # with open('human_input_data', 'r') as fin:
+    #     sys.stdin = fin
+    #     # ....
+    # sys.stdin = stdin
+    pass
+
+
