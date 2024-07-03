@@ -72,7 +72,14 @@ class GameState:
 
     def try_play_card(self, again: bool = False) -> GameStage:
         """Текущий игрок пытается играть карту с руки. again=True - после того, как уже брал карту из колоды."""
-        pass
+        p: Player = self.current_player()
+        card = p.choose_card(self.top, [])
+        if card is None:
+            return GameStage.NEXT_TURN if again else GameStage.DRAW_CARD
+        p.hand.remove_card(card)
+        self.top = card
+        return GameStage.NEXT_TURN
+
 
     def draw_card(self, game_interactions: GameInteractions) -> GameStage:
         """Текущий игрок берет карту из колоды."""
@@ -80,9 +87,13 @@ class GameState:
 
     def next_player(self):
         """Ход переходит к следующему игроку."""
-        pass
+        # 0 1 2 0 1 2 0 1 2  i % 3
+        # 0 1 2 3 4 5 6 7 8  i
+        n = len(self.players)
+        self.iplayer = (self.iplayer + 1) % n
 
     def is_win_condition(self):
+        """Проверка, что игрок победил (у него не осталось карт)."""
         p = self.current_player()
         return p.hand.is_empty()
 
