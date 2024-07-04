@@ -1,8 +1,14 @@
+from abc import ABC, abstractmethod
+
 from scr.card import Card, CardException
 from scr.hand import Hand
 
+class PlayerInteractions(ABC):
+    @abstractmethod
+    def choose_card(self, hand: Hand, top: Card, card_counts: list[int]) -> Card | None:
+        pass
 
-class Human:
+class Human(PlayerInteractions):
     """Взаимодествие с человеком."""
     def choose_card(self, hand: Hand, top: Card, card_counts: list[int]) -> Card | None:
         '''
@@ -22,7 +28,7 @@ class Human:
                 print('Такой карты не существует')
 
 
-class AI:
+class AI(PlayerInteractions):
     """Решения принимает бот"""
     def choose_card(self, hand: Hand, top: Card, card_counts: list[int]) -> Card | None:
         """Выбирает первую подходящую карту с руки, иначе None"""
