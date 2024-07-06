@@ -2,6 +2,12 @@ from scr.card import Card
 from scr.hand import Hand
 from scr.player import Player, AI, Human
 
+dict_Alex = {
+      "name": "Alex",
+      "hand": "r3 y5 g4 g1",
+      "is_human": True
+}
+
 
 def test_create():
     hand = Hand.load('r1 b7 g3')
@@ -25,6 +31,13 @@ def test_save():
     p = Player(name='Bob', hand=hand, is_human=True)
     dres = p.save()
     assert dres == {'name': 'Bob', 'hand': 'r1 b7 g3', 'is_human': True}
+
+def test_load():
+    p = Player.load(dict_Alex)
+    assert p.name == 'Alex'
+    assert isinstance(p.actor, Human)
+    assert p.hand == Hand([Card('red', 3), Card('yellow', 5), Card('green', 4), Card('green', 1)])
+
 
 def test_AI_choose_card():
     hand = Hand.load('r1 b7 g3')
