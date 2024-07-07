@@ -15,7 +15,8 @@ class GameStage(Enum):
 
 
 class GameState:
-    def __init__(self, players=list[Player], iplayer: int = 0, deck: Deck = None, top: Card = None):
+    INITIAL_HAND_SIZE = 7
+    def __init__(self, players: list[Player], iplayer: int = 0, deck: Deck = None, top: Card = None):
         self.players = players
         self.iplayer = iplayer
         if deck is None:
@@ -28,9 +29,10 @@ class GameState:
         self.top = top
 
         # если у всех игроков нет карт, это новая игра, раздадим по 7 карт всем
-        for p in self.players:
-            for _ in range(7):
-                p.hand.add_card(self.deck.draw_card())
+        if self.current_player().hand.is_empty():
+            for p in self.players:
+                for _ in range(self.INITIAL_HAND_SIZE):
+                    p.hand.add_card(self.deck.draw_card())
 
 
     def current_player(self) -> Player:
@@ -90,7 +92,11 @@ class GameState:
 
     def draw_card(self, game_interactions: GameInteractions) -> GameStage:
         """Текущий игрок берет карту из колоды."""
-        pass
+        card = self.deck.draw_card()
+        p = self.current_player()
+        p.hand.add_card(card)
+        game_interactions.print_draw_card(p)
+        return GameStage.PLAY_CARD_AGAIN
 
     def next_player(self):
         """Ход переходит к следующему игроку."""
