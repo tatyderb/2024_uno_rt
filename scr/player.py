@@ -60,6 +60,9 @@ class Player:
     def __repr__(self):
         return f'{self.name}: {self.hand}'
 
+    def __eq__(self, other):
+        return self.to_dict() == other.to_dict()
+
     def to_dict(self):
         return {
             'name': self.name,

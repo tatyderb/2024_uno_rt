@@ -38,7 +38,6 @@ def test_load():
     assert isinstance(p.actor, Human)
     assert p.hand == Hand([Card('red', 3), Card('yellow', 5), Card('green', 4), Card('green', 1)])
 
-
 def test_AI_choose_card():
     hand = Hand.load('r1 b7 g3')
     p = Player(name='Alex', hand=hand)
