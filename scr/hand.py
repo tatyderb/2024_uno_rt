@@ -2,11 +2,17 @@ from scr.card import Card
 
 
 class Hand:
-    def __init__(self, cards=list[Card]):
+    def __init__(self, cards: list[Card] = None):
         self.cards = cards or []
 
     def __repr__(self):
-        return ' '.join(map(str, self.cards))
+        if self.cards:
+            return ' '.join(map(str, self.cards))
+        else:
+            return ''
+
+    def __len__(self):
+        return len(self.cards)
 
     def save(self):
         return repr(self)
@@ -22,8 +28,8 @@ class Hand:
 
         # cards = [Card.load(w) for w in words]
 
-        deck = cls(cards=cards)
-        return deck
+        hand = cls(cards=cards)
+        return hand
 
     def __eq__(self, other):
         return self.cards == other.cards

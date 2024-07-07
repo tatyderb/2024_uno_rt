@@ -18,6 +18,9 @@ class Deck:
     def save(self):
         return repr(self)
 
+    def __len__(self):
+        return len(self.cards)
+
     @classmethod
     def load(cls, text: str):
         """Из строки вида 'b2 r7 y4' возвращает колоду"""
